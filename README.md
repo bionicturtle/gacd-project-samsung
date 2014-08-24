@@ -9,7 +9,7 @@ For this assignment, the key files in this repo are
 
 I am indebited to David Hood's FAQ especially [this diagram](https://github.com/bionicturtle/gacd-project-samsung/blob/master/david_hood_diagram.png), which greatly accelerated my comprehension of the assignment's data files, and further for his excellent commentary on wide-versus-narrow tidy data. 
 
-To understand wide/long, consider that the assignment ask for summary statistics (i.e., mean, std) on 66 feature variables for 30 subjects while they conduct six (6) activities: there are 11,880 values in cells. 
+To understand wide/long, consider that the assignment ask for summary statistics (i.e., mean, std) on 66 feature variables for 30 subjects while they conduct six (6) activities: datawise there are 30 * 6 * 66 = 11,880 values in cells. 
 
 * The wide form (e.g., tidySamsung.text) displays 180 rows (30 subjects * 6 activities) * 66 measures
 * The tallest form is to simply stack the values in one column (see script comments for code). This long form is 11,880 observations, one for each combination of subject+activity+measure
