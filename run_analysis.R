@@ -39,15 +39,15 @@ run_analysis <- function() {
       
       # row bind test data to (below) training data. all_data is the merged dataset
       # This achieves Step 1: Merges the training and the test sets to create one data set.
-      # all_data contains 10,299 obs x 563 variables [incl 2 added columns, subject and activity]
+      # all_data contains 10,299 obs x 561 variables [if we include subject and activity, then +2 is 563 columns]
       all_data <- rbind(all_train, all_test)
       
-      # retrive features (i.e., 561 variables) and use them as column names, plus subject and activity for final two columns
+      # retrive features (i.e., 561 variables) and use them as column names (+ subject and activity)
       features_data <-read.table(fileUrl_features)
       colnames(all_data) <- c(as.character(features_data$V2),"subject","activity")
       
-      # From 563 features, all_data_sub_MF retrieves subset of 79 with mean or std. Incl subject and activity = 81 variables. But this includes MeanFreq()
-      # all_data_sub subsets to exclude 13 with MeanFreq(), such that all_data_sub includes (79+2)- 13 = 68 variables
+      # From 563 features, all_data_sub_MF retrieves subset of 79 with mean or std. But this includes MeanFreq()
+      # all_data_sub subsets to exclude 13 with MeanFreq(), such that all_data_sub includes 66 = 79 - 13 feature variables (w/ subject and activity is 81 columns)
       # This achieves Step 2: "Extracts only the measurements on the mean and standard deviation for each measurement"
       all_data_sub_MF <- all_data[,grepl("mean|std|subject|activity",colnames(all_data))]
       all_data_sub <- all_data_sub_MF[,!grepl("meanFreq",colnames(all_data_sub_MF))]
@@ -68,7 +68,7 @@ run_analysis <- function() {
       colnames(all_data_sub) <- gsub("BodyBody", "Body", colnames(all_data_sub))
       
       # With 2 id variables and 66 measures, melt reshapes to all_data_sub to data_melted which contains 679,734 observations = 66 measure var * 10,299 obs
-      # tidy_df is the tidy dataframe (180 obs of 68 variables): 180 obs = 30 subjects * 6 activities each
+      # tidy_df is the tidy dataframe (180 obs of 66 + 2 variables): 180 obs = 30 subjects * 6 activities each
       # This achived Step 5:"Creates a second, independent tidy data set with the average of each variable for each activity and each subject"
       data_melted <- melt(all_data_sub, id=c("subject","activity"))
       tidy_df <- dcast(data_melted, subject+activity ~ variable, mean)
