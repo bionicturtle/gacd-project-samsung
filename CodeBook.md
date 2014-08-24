@@ -12,7 +12,7 @@ The script ("run_analysis.R") produces the tidy dataset ("tidySamsung.txt"") fro
 * camelCase was preserved to keep variables (they are already logical, I disagree with complexifying them!) short and the script fixed the nine __erroneous instances__ of "BodyBody"
 
 
-| variable             | description/definition               | notes (width excluded as unnecessary)                 |
+| variable             | description/definition               | notes                |
 |----------------------|--------------------------------------|-------------------------------------------------------|
 | subject              | Volunteer, aged 19-48 years          | 1:30, originally parsed into train and test           |
 | activity             | One of six activities                | walking,walkingup,walkingdown,sitting,standing,laying |
