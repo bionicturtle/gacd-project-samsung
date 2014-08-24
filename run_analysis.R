@@ -67,10 +67,17 @@ run_analysis <- function() {
       colnames(all_data_sub) <- gsub("std", "Std", colnames(all_data_sub))
       colnames(all_data_sub) <- gsub("BodyBody", "Body", colnames(all_data_sub))
       
-      # With 2 id variables and 66 measures, melt reshapes to all_data_sub to data_melted which contains 679,734 observations = 66 measure var * 10,299 obs
+      # With 2 id variables and 66 measures, melt reshapes all_data_sub to data_melted 
+      # data_melted is NOT aggregated, it contains 679,734 observations = 66 measure var * 10,299 obs
       # tidy_df is the tidy dataframe (180 obs of 66 + 2 variables): 180 obs = 30 subjects * 6 activities each
       # This achived Step 5:"Creates a second, independent tidy data set with the average of each variable for each activity and each subject"
       data_melted <- melt(all_data_sub, id=c("subject","activity"))
       tidy_df <- dcast(data_melted, subject+activity ~ variable, mean)
       write.table(tidy_df, file="tidySamsung.txt", row.names=FALSE)
+      
+      # Note that tidy_df is the WIDEST tidy dataset, but not the only tidy dataset. There are (at least) three other tidy datasets
+      # The narrowest tidy dataset is returned by:
+      # tidy_df_tall <- aggregate(value ~ subject + activity + variable, data = data_melted, mean)
+      # This tall, tidy dataframe is 11,880 obs of 4 variables, where each row is a single value 
+      # for a combination of subject+activity+measure which is 30*6*66 = 11,880 observations
 }
