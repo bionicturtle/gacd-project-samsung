@@ -10,7 +10,7 @@ The script ("run_analysis.R") produces the tidy dataset ("tidySamsung.txt"") fro
 * The merged training and test datasets contained 561 features variables
 * The subset in "tidySamsung.txt" contains only 66 (i.e., Mean and Std) plus subject and activity
 * camelCase was preserved to keep variables (they are already logical, I disagree with complexifying them!) short and the script fixed the nine __erroneous instances__ of "BodyBody"
-
+* As noted in the script (and readme), this is the wide form of the tidy as the 66 measures are the columns (the script shows the command for the long form)
 
 | variable             | description/definition               | notes                |
 |----------------------|--------------------------------------|-------------------------------------------------------|
